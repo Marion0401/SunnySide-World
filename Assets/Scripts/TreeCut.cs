@@ -24,11 +24,15 @@ public class TreeCut : MonoBehaviour
     void Start()
     {
         hitPoints = maxHit;
+        GetComponent<SpriteRenderer>().sprite = trunkFull;
     }
 
     public void TreeHasBeenHit()
     {
         isHit = true;
+
+
+
     }
 
     // Update is called once per frame
@@ -52,6 +56,7 @@ public class TreeCut : MonoBehaviour
             color.a = 0;
             treetop.GetComponent<SpriteRenderer>().color = color;
             counting = true;
+            GetComponent<SpriteRenderer>().sprite = trunkCut;
 
             treetop.SetFloat("RegrowSpeed", 0.0f);
         }
@@ -71,7 +76,7 @@ public class TreeCut : MonoBehaviour
             if (counter >= timeBeforeRespawn)
             {
                 treetop.GetComponent<SpriteRenderer>().color = Color.white;
-
+                GetComponent<SpriteRenderer>().sprite = trunkFull;
 
 
                 counter = 0;

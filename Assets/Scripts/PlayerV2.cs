@@ -7,7 +7,14 @@ public class PlayerV2 : MonoBehaviour
     public bool facingRight = true;
     public bool isMoving = false;
     public bool chopping = false;
+
+
     public bool idle = false;
+    public bool chop = false;
+    public bool walk = false;
+
+
+
     public bool noMoveAction = false;
     [Space(5)]
     [SerializeField] Animator Body;
@@ -27,6 +34,9 @@ public class PlayerV2 : MonoBehaviour
         
         float yInput = Input.GetAxis("Vertical");
         float xInput = Input.GetAxis("Horizontal");
+
+
+        
 
         //print(xInput.ToString() + "," + yInput.ToString());
 
@@ -93,10 +103,7 @@ public class PlayerV2 : MonoBehaviour
         speed = tempSpeed;
 
        
-        Body.SetBool("isMoving", isMoving);
-        Hair.SetBool("isMoving", isMoving);
-        Hand.SetBool("isMoving", isMoving);
-        
+       
 
         // Réseau
         //==================================
@@ -104,9 +111,14 @@ public class PlayerV2 : MonoBehaviour
         if (isMoving != Body.GetBool("isMoving"))
         {
             //Send("MoveAnim", isMoving);
+
+            Body.SetBool("isMoving", isMoving);
+            Hair.SetBool("isMoving", isMoving);
+            Hand.SetBool("isMoving", isMoving);
+
         }
 
-        if(moved)
+        if (moved)
         {
             //Send("Moved", x, y, z, facingRight);
         }
@@ -137,22 +149,25 @@ public class PlayerV2 : MonoBehaviour
     void Update()
     {
         idle = Body.GetCurrentAnimatorStateInfo(0).IsTag("IDLE");
+        chop = Body.GetCurrentAnimatorStateInfo(0).IsTag("CHOP");
+        walk = Body.GetCurrentAnimatorStateInfo(0).IsTag("WALK");
+
         if (chopping) { Chop(false); chopping = false; }
 
 
-        noMoveAction = false;
-        if(idle)
+
+
+        noMoveAction = chop;
+
+
+
+        if(idle || walk)
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                noMoveAction = true;
                 Chop(true);
                 chopping = true;
             } 
-            else
-            {
-                noMoveAction = false;
-            }
 
         }
         
@@ -160,7 +175,7 @@ public class PlayerV2 : MonoBehaviour
 
 
 
-        if(!noMoveAction) Move();
+        if(!noMoveAction && ! chopping) Move();
 
 
 
