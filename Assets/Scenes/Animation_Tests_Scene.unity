@@ -1872,9 +1872,13 @@ MonoBehaviour:
   facingRight: 1
   isMoving: 0
   chopping: 0
+  digging: 0
+  hit: 0
   idle: 0
   chop: 0
+  dig: 0
   walk: 0
+  hurt: 0
   noMoveAction: 0
   Body: {fileID: 1311730065}
   Hair: {fileID: 288418774}
@@ -2215,9 +2219,13 @@ MonoBehaviour:
   facingRight: 1
   isMoving: 0
   chopping: 0
+  digging: 0
+  hit: 0
   idle: 0
   chop: 0
+  dig: 0
   walk: 0
+  hurt: 0
   noMoveAction: 0
   Body: {fileID: 519173611}
   Hair: {fileID: 663980796}

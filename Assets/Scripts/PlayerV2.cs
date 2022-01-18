@@ -7,11 +7,15 @@ public class PlayerV2 : MonoBehaviour
     public bool facingRight = true;
     public bool isMoving = false;
     public bool chopping = false;
+    public bool digging = false;
+    public bool hit = false;
 
 
     public bool idle = false;
     public bool chop = false;
+    public bool dig = false;
     public bool walk = false;
+    public bool hurt = false;
 
 
 
@@ -145,23 +149,79 @@ public class PlayerV2 : MonoBehaviour
 
     }
 
+    private void Dig(bool state)
+    {
+        Body.SetBool("isDigging", state);
+        Hair.SetBool("isDigging", state);
+        Hand.SetBool("isDigging", state);
+
+
+        // Réseau
+        //==========================
+
+        //Send("Dig", state);
+
+        //==========================
+
+    }
+
+
+    private void Hurt(bool state)
+    {
+        Body.SetBool("gotHit", state);
+        Hair.SetBool("gotHit", state);
+        Hand.SetBool("gotHit", state);
+
+
+        // Réseau
+        //==========================
+
+        //Send("Hurt", state);
+
+        //==========================
+    }
+
+    private void AnimSync()
+    {
+        if (Body.GetCurrentAnimatorStateInfo(0).normalizedTime == 0)
+            Hair.Play(Hair.GetCurrentAnimatorStateInfo(0).fullPathHash, 0,0);
+
+        if (Body.GetCurrentAnimatorStateInfo(0).normalizedTime == 0)
+            Hand.Play(Hand.GetCurrentAnimatorStateInfo(0).fullPathHash, 0, 0);
+    }
+
+
     // Update is called once per frame
     void Update()
     {
+        //AnimSync();
+
         idle = Body.GetCurrentAnimatorStateInfo(0).IsTag("IDLE");
         chop = Body.GetCurrentAnimatorStateInfo(0).IsTag("CHOP");
+        dig = Body.GetCurrentAnimatorStateInfo(0).IsTag("DIG");
         walk = Body.GetCurrentAnimatorStateInfo(0).IsTag("WALK");
+        hurt = Body.GetCurrentAnimatorStateInfo(0).IsTag("HURT");
 
         if (chopping) { Chop(false); chopping = false; }
 
+        if (digging) { Dig(false); digging = false; }
+
+        if (hit) { Hurt(false); hit = false; }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Hurt(true);
+            hit = true;
+        }
 
 
 
-        noMoveAction = chop;
+
+        noMoveAction = (chop || dig || hurt);
 
 
 
-        if(idle || walk)
+        if((idle || walk) && !hurt)
         {
             if (Input.GetKey(KeyCode.Space))
             {
@@ -169,15 +229,21 @@ public class PlayerV2 : MonoBehaviour
                 chopping = true;
             } 
 
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                Dig(true);
+                digging = true;
+            }
+
         }
         
 
 
 
 
-        if(!noMoveAction && ! chopping) Move();
+        if(!noMoveAction && ! chopping && ! digging && !hurt) Move();
 
 
-
+        
     }
 }
