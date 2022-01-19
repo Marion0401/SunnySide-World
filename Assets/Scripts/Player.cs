@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public static Player instance;
     private Vector3 mousePosition;
     private Vector3 direction;
+    public AnimationInterface animator;
+    public bool isTurned = false;
     // Start is called before the first frame update
    
 
@@ -17,18 +19,45 @@ public class Player : MonoBehaviour
         instance = this;
 
     }
+
+    private void Start()
+    {
+        animator = GetComponent<AnimationInterface>();
+    }
     // Update is called once per frame
     void Update()
     {
-        
+        animator.isMoving = false;
+
         if (Input.GetMouseButtonDown(0))
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);            
             direction = mousePosition;
             direction.z = 0;
             GameManager.instance.SendNewPosition(direction.x, direction.y);
-        }     
-        transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);        
+            if (mousePosition.x < transform.position.x && isTurned==false)
+            {
+                
+                transform.Rotate(new Vector3 (0, 180, 0));
+                isTurned = true;
+
+            }
+
+            else if (mousePosition.x > transform.position.x && isTurned == true)
+            {
+                transform.Rotate(new Vector3(0, 180, 0));
+                isTurned = false;
+            }
+
+
+        }
+        if (transform.position != direction)
+        {
+            
+            transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);
+            animator.isMoving = true;
+
+        }
     }
 
 

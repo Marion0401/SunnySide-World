@@ -4,20 +4,39 @@ using UnityEngine;
 
 public class Trees : MonoBehaviour
 {
-    public GameObject treeCut;
+    private TreeCut treeCut;
     private bool isCollided;
     private int indexTree;
-    
-    private void OnMouseDown()
+
+    private void Start()
+    {
+        treeCut = GetComponent<TreeCut>();
+    }
+
+    private void Update()
     {
         if (isCollided)
         {
-            Instantiate(treeCut, gameObject.transform.position, Quaternion.identity);
-            GameManager.instance.SendMessageTreeCut(indexTree);
-            Destroy(gameObject);
+            
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                
+                Player.instance.animator.isChopping = true;
+                treeCut.isHit = true;
+
+                
+            }
+            //Instantiate(treeCut, gameObject.transform.position, Quaternion.identity);
+            //GameManager.instance.SendMessageTreeCut(indexTree);
+            //Destroy(gameObject);
         }
-        
+        if (treeCut.isCut == true)
+        {
+            Debug.Log("c est coupé");
+            GameManager.instance.SendMessageTreeCut(indexTree);
+        }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -30,7 +49,7 @@ public class Trees : MonoBehaviour
             {
                 
                 indexTree = index;
-                
+                Debug.Log(index);
 
             }
         }

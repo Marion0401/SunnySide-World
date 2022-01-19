@@ -13,14 +13,14 @@ public class TreeCut : MonoBehaviour
     public int hitPoints = 3;
 
     [SerializeField] float timeBeforeRespawn = 10f;
-    public float counter = 0;
-    public bool counting = false;
+    private float counter = 0;
+    private bool counting = false;
 
     public bool isCut = false;
     public bool isHit = true;
     public bool isHittable = false;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         hitPoints = maxHit;
@@ -40,13 +40,12 @@ public class TreeCut : MonoBehaviour
     {
         isHittable = treetop.GetCurrentAnimatorStateInfo(0).IsTag("IDLE");
 
-        //
-        // isHit = (Input.GetKeyDown(KeyCode.Space)) ? true : false;
-
+        
         
 
-        if (isHit && isHittable && hitPoints == 1)
+        if (isHit && isHittable && hitPoints == 1 )
         {
+
             isCut = true;
             treetop.SetBool("isCut", true);
             hitPoints = 0;
@@ -69,6 +68,8 @@ public class TreeCut : MonoBehaviour
             hitPoints--;
         }
 
+        
+
         if (counting)
         {
             isHit = false;
@@ -81,6 +82,7 @@ public class TreeCut : MonoBehaviour
 
                 counter = 0;
                 counting = false;
+                isCut = false;
                 treetop.SetBool("isCut", false);
                 hitPoints = maxHit;
                 treetop.SetFloat("RegrowSpeed", 0.8f);

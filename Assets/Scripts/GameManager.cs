@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager instance;
 	public static int nbMainPlayer;
-	public GameObject playerPrefab;
+	//public GameObject playerPrefab;
 	public List<GameObject> listPlayerPrefab;
 	public List<GameObject> listOtherPlayerPrefab;
 	
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
 					break;
 
 				case "PlayerMoved":
-					Debug.Log("Player Number "+m.GetInt(0) + " moved");
+					
 					OtherPlayer.instance.ChangePositionOtherPlayer(m.GetInt(0), m.GetFloat(1), m.GetFloat(2));
 					
 					break;
