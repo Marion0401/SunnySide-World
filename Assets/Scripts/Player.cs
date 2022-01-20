@@ -5,57 +5,64 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
-    private bool isTurned=false;
+    
+    public static Player instance;
+    private Vector3 mousePosition;
+    private Vector3 direction;
+    public AnimationInterface animator;
+    public bool isTurned = false;
     // Start is called before the first frame update
-    void Start()
+   
+
+    private void Awake()
     {
+        instance = this;
 
     }
 
+    private void Start()
+    {
+        animator = GetComponent<AnimationInterface>();
+    }
     // Update is called once per frame
     void Update()
     {
+        animator.isMoving = false;
 
-
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetMouseButtonDown(0))
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + speed);
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (isTurned==false)
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);            
+            direction = mousePosition;
+            direction.z = 0;
+            GameManager.instance.SendNewPosition(direction.x, direction.y);
+            if (mousePosition.x < transform.position.x && isTurned==false)
             {
-                transform.Rotate(0, 180, 0);
+                
+                transform.Rotate(new Vector3 (0, 180, 0));
                 isTurned = true;
+
             }
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            transform.position = new Vector3(transform.position.x - speed, transform.position.y);
 
-        }
-
-
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - speed);
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            if (isTurned)
+            else if (mousePosition.x > transform.position.x && isTurned == true)
             {
-                transform.Rotate(0, 180, 0);
+                transform.Rotate(new Vector3(0, 180, 0));
                 isTurned = false;
-
             }
-        }
 
-        if (Input.GetKey(KeyCode.D))
+
+        }
+        if (transform.position != direction)
         {
-            transform.position = new Vector3(transform.position.x + speed, transform.position.y);
-        }
+            
+            transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);
+            animator.isMoving = true;
 
+        }
     }
+
+
+
+    
+
+
 }
