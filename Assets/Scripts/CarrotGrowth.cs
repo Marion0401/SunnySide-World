@@ -19,6 +19,7 @@ public class CarrotGrowth : MonoBehaviour
     private bool bigCarrotOn = false;
     
     [SerializeField] float timeToFull = 2f;
+    [SerializeField] float dissapearDelay = 0.6f;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +42,6 @@ public class CarrotGrowth : MonoBehaviour
 
             gotHarvested = false;
             
-            smallCarrot.SetActive(false);
-            smallCarrotOn = false;
-
-            bigCarrot.SetActive(false);
-            bigCarrotOn = false;
         }
         
         if(level < 2)
@@ -58,7 +54,16 @@ public class CarrotGrowth : MonoBehaviour
             }
         }
 
-        if ((level == 0) && (betterCounter >= (timeToFull / 2)) && !smallCarrotOn)
+        if ((level == 0) && (betterCounter >= dissapearDelay) && smallCarrot && bigCarrot)
+        {
+            smallCarrot.SetActive(false);
+            smallCarrotOn = false;
+
+            bigCarrot.SetActive(false);
+            bigCarrotOn = false;
+        }
+
+        if ((level == 0) && (betterCounter >= ((timeToFull + dissapearDelay) / 2)) && !smallCarrotOn)
         {
             smallCarrotOn = true;
             smallCarrot.SetActive(true);
@@ -66,7 +71,7 @@ public class CarrotGrowth : MonoBehaviour
         }
 
         
-        if ((level == 1) && (betterCounter >= timeToFull) && !bigCarrotOn)
+        if ((level == 1) && (betterCounter >= (timeToFull + dissapearDelay)) && !bigCarrotOn)
         {
             bigCarrotOn = true;
             bigCarrot.SetActive(true);
