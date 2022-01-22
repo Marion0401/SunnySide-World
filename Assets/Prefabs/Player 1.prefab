@@ -178,7 +178,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  animator: {fileID: 0}
   isTurned: 0
+  positionObstacle: 0.5
 --- !u!61 &-5338413421392512931
 BoxCollider2D:
   m_ObjectHideFlags: 0

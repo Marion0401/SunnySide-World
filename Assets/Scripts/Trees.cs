@@ -23,18 +23,19 @@ public class Trees : MonoBehaviour
                 
                 Player.instance.animator.isChopping = true;
                 treeCut.isHit = true;
+                GameManager.instance.SendMessageTreeCut(indexTree);
 
-                
+
             }
             //Instantiate(treeCut, gameObject.transform.position, Quaternion.identity);
             //GameManager.instance.SendMessageTreeCut(indexTree);
             //Destroy(gameObject);
         }
-        if (treeCut.isCut == true)
-        {
-            Debug.Log("c est coupé");
-            GameManager.instance.SendMessageTreeCut(indexTree);
-        }
+        //if (treeCut.isCut == true)
+        //{
+        //    Debug.Log("c est coupé");
+        //    GameManager.instance.SendMessageTreeCut(indexTree);
+        //}
     }
 
 
@@ -49,7 +50,7 @@ public class Trees : MonoBehaviour
             {
                 
                 indexTree = index;
-                Debug.Log(index);
+                
 
             }
         }

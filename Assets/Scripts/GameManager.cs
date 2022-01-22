@@ -152,6 +152,11 @@ public class GameManager : MonoBehaviour
 					Map.instance.cutTreeWithIndex(m.GetInt(0));
 					break;
 
+				case "PlayerIsCutting":
+					Map.instance.playerCutTreeWithIndex(m.GetInt(0), m.GetInt(1));
+
+					break;
+
 				case "PlayerMoved":
 					
 					OtherPlayer.instance.ChangePositionOtherPlayer(m.GetInt(0), m.GetFloat(1), m.GetFloat(2));

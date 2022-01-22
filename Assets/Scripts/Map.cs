@@ -24,5 +24,10 @@ public class Map : MonoBehaviour
         //Destroy(tree);
     }
 
-    
+    public void playerCutTreeWithIndex(int indexTree, int numberPlayer)
+    {
+        GameManager.arrayOtherPlayerGameObject[numberPlayer].GetComponent<AnimationInterface>().isChopping = true;
+        GameObject tree = Map.instance.listTrees[indexTree];
+        tree.GetComponent<TreeCut>().isHit =true;
+    }
 }
