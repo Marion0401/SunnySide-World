@@ -7,10 +7,15 @@ public class Trees : MonoBehaviour
     private TreeCut treeCut;
     private bool isCollided;
     private int indexTree;
+    public GameObject axePrefab;
+    private GameObject axe;
+    public float positionAxe;
 
     private void Start()
     {
         treeCut = GetComponent<TreeCut>();
+        axe = Instantiate(axePrefab, new Vector2(transform.position.x, transform.position.y + positionAxe), Quaternion.identity);
+        axe.SetActive(false);
     }
 
     private void Update()
@@ -27,22 +32,21 @@ public class Trees : MonoBehaviour
 
 
             }
-            //Instantiate(treeCut, gameObject.transform.position, Quaternion.identity);
-            //GameManager.instance.SendMessageTreeCut(indexTree);
-            //Destroy(gameObject);
+           
         }
-        //if (treeCut.isCut == true)
-        //{
-        //    Debug.Log("c est coupé");
-        //    GameManager.instance.SendMessageTreeCut(indexTree);
-        //}
+        if (treeCut.hitPoints == 0)
+        {
+            axe.SetActive(false);
+        }
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         isCollided = true;
-        
+        axe.SetActive(true);
+
+
         for (int index=0; index<Map.instance.listTrees.Count;index++)
         {
             
@@ -59,7 +63,9 @@ public class Trees : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         isCollided = false;
+        axe.SetActive(false);
+
     }
-    
+
 
 }
