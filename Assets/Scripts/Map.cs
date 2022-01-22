@@ -6,7 +6,8 @@ public class Map : MonoBehaviour
 {
     public static Map instance;
     public List<GameObject> listTrees = new List<GameObject>();
-    public GameObject treeCut; 
+    public List<GameObject> listCarrots = new List<GameObject>();
+    public List<GameObject> listSkeletons = new List<GameObject>();
     
 
     private void Awake()
@@ -29,5 +30,19 @@ public class Map : MonoBehaviour
         GameManager.arrayOtherPlayerGameObject[numberPlayer].GetComponent<AnimationInterface>().isChopping = true;
         GameObject tree = Map.instance.listTrees[indexTree];
         tree.GetComponent<TreeCut>().isHit =true;
+    }
+
+    public void playerDigCarrotWithIndex(int indexCarrot, int numberPlayer)
+    {
+        GameManager.arrayOtherPlayerGameObject[numberPlayer].GetComponent<AnimationInterface>().isDigging = true;
+        GameObject carrotHole = Map.instance.listCarrots[indexCarrot];
+        carrotHole.GetComponent<CarrotGrowth>().gotHarvested = true;
+    }
+
+    public void playerAttackingSkeletonWithIndex(int indexSkeleton, int numberPlayer)
+    {
+        GameManager.arrayOtherPlayerGameObject[numberPlayer].GetComponent<AnimationInterface>().isAttacking = true;
+        GameObject skeleton = Map.instance.listSkeletons[indexSkeleton];
+        skeleton.GetComponent<Skelly_AnimationInterface>().gotHit = true;
     }
 }

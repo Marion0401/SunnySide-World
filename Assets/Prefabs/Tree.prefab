@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6caf425c5a718464abfa6a6b3e302a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  axePrefab: {fileID: 7031748421148042685, guid: ce3a9f508fefcff4786475ab7a743d6c, type: 3}
+  positionAxe: 0.5
 --- !u!1 &5779839862325233393
 GameObject:
   m_ObjectHideFlags: 0

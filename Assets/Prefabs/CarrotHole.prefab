@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4792499886354192223}
   - component: {fileID: 4792499886354192222}
   - component: {fileID: 4792499886354192221}
+  - component: {fileID: -929605528825597076}
+  - component: {fileID: -1761253404931999897}
   m_Layer: 0
   m_Name: CarrotHole
   m_TagString: Untagged
@@ -105,6 +107,46 @@ MonoBehaviour:
   gotHarvested: 0
   respawning: 0
   timeToFull: 2
+--- !u!61 &-929605528825597076
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792499886354192220}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.16}
+  m_EdgeRadius: 0
+--- !u!114 &-1761253404931999897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792499886354192220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52dc6e0d9fc2f584a86a4d9b8529ea69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shovelPrefab: {fileID: 723181661332864286, guid: 6a103b6de36e928478ac2b6c94a875a0, type: 3}
+  positionShovel: 0.5
 --- !u!1 &4792499886576858162
 GameObject:
   m_ObjectHideFlags: 0

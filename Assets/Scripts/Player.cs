@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         {
             
             transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);
-            Debug.Log(direction);
+            
 
             animator.isMoving = true;
 
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         
         direction = transform.position;
         direction.z = 0;
-        
+        GameManager.instance.SendNewPosition(direction.x, direction.y);
 
     }
     

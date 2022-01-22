@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager instance;
 	public static int nbMainPlayer;
-	//public GameObject playerPrefab;
+	
 	public List<GameObject> listPlayerPrefab;
 	public List<GameObject> listOtherPlayerPrefab;
 	
@@ -162,8 +162,20 @@ public class GameManager : MonoBehaviour
 					OtherPlayer.instance.ChangePositionOtherPlayer(m.GetInt(0), m.GetFloat(1), m.GetFloat(2));
 					
 					break;
+				case "PlayerIsDigging":
+					Map.instance.playerDigCarrotWithIndex(m.GetInt(0), m.GetInt(1));
 
+					break;
+				case "PlayerIsAttacking":
+					Map.instance.playerAttackingSkeletonWithIndex(m.GetInt(0), m.GetInt(1));
+					break;
+
+				case "PlayerLeft":
+					Debug.Log("playerleft");
+					Destroy(listOtherPlayerGameObject[m.GetInt(0)]);
+					break;
 			}
+
 		}
 
 		// clear message queue after it's been processed
@@ -174,6 +186,17 @@ public class GameManager : MonoBehaviour
     {
 		pioconnection.Send("IsCutting", numberTree);
     }
+
+	public void SendMessageCarrot(int numberCarrotHole)
+	{
+		pioconnection.Send("IsDigging", numberCarrotHole);
+	}
+
+	public void SendMessageSkeletonAttacked(int numberSkeleton)
+    {
+		pioconnection.Send("IsAttacking", numberSkeleton);
+
+	}
 
 	public void SendNewPosition(float posX, float posY)
     {
