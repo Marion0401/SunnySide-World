@@ -5,7 +5,7 @@ using UnityEngine;
 public class Skelly_AnimationInterface : MonoBehaviour
 {
     Animator Anim;
-    [SerializeField] int hitPoints = 3;
+    public int hitPoints = 3;
     float counter = 0;
     public float betterCounter = 0;
     [SerializeField] float deadTime = 2;

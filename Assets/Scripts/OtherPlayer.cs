@@ -59,10 +59,11 @@ public class OtherPlayer : MonoBehaviour
 
         }
     }
+    
     public void ChangePositionOtherPlayer(int nbPlayer, float posX, float posY)
     {
 
-        GameManager.arrayOtherPlayerDestination[nbPlayer] = new Vector3(posX, posY, 0);
+        GameManager.arrayOtherPlayerDestination[nbPlayer] = new Vector3(posX, posY, -5);
         
         
 

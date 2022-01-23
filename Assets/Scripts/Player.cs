@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             direction = mousePosition;
-            direction.z = 0;
+            direction.z = -5;
             GameManager.instance.SendNewPosition(direction.x, direction.y);
             if (mousePosition.x < transform.position.x && isTurned == false)
             {
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
     {
         
         direction = transform.position;
-        direction.z = 0;
+        direction.z = -5;
         GameManager.instance.SendNewPosition(direction.x, direction.y);
 
     }

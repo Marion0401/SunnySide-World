@@ -34,6 +34,10 @@ public class Skeleton : MonoBehaviour
             }
 
         }
+        if (skellyAnimation.hitPoints == 0)
+        {
+            sword.SetActive(false);
+        }
 
     }
 
@@ -43,10 +47,10 @@ public class Skeleton : MonoBehaviour
         isCollided = true;
         sword.SetActive(true);
 
-        for (int index = 0; index < Map.instance.listTrees.Count; index++)
+        for (int index = 0; index < Map.instance.listSkeletons.Count; index++)
         {
 
-            if (Map.instance.listTrees[index].name == gameObject.name)
+            if (Map.instance.listSkeletons[index].name == gameObject.name)
             {
 
                 indexSkeleton = index;

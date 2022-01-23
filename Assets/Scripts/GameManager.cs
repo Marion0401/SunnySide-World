@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
 
 
 					
-                    GameObject newPlayer=Instantiate(listOtherPlayerPrefab[m.GetInt(0)], new Vector3(m.GetFloat(1), m.GetFloat(2)), Quaternion.identity);
+                    GameObject newPlayer=Instantiate(listOtherPlayerPrefab[m.GetInt(0)], new Vector3(m.GetFloat(1), m.GetFloat(2),-5), Quaternion.identity);
 					//listOtherPlayerGameObject.Add(newPlayer);
 					arrayOtherPlayerGameObject[m.GetInt(0)] = newPlayer;
 					//listOtherPlayerDestination.Add(newPlayer.transform.position);
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
                 case "InitializePlayer":
 					
 
-					mainPlayer = Instantiate(listPlayerPrefab[m.GetInt(0)], new Vector3(0, 0, 0), Quaternion.identity);
+					mainPlayer = Instantiate(listPlayerPrefab[m.GetInt(0)], new Vector3(0, 0, -5), Quaternion.identity);
 					nbMainPlayer = m.GetInt(0);
 					pioconnection.Send("OtherPlayer",m.GetString(1));
 					
