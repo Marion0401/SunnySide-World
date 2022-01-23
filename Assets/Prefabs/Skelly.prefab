@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e94dabea5707343a5f727da7ff96aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordPrefab: {fileID: 4516972819188478154, guid: 46e1321287776774a96847ff4c33f7b4, type: 3}
+  positionSword: 0
 --- !u!61 &8884954847218528479
 BoxCollider2D:
   m_ObjectHideFlags: 0

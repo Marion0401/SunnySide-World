@@ -42,8 +42,11 @@ public class Carrot : MonoBehaviour
             {
                 carrotGrowth.gotHarvested = true;
                 isDiggingForCarrot = false;
+                shovel.SetActive(false);
             }
         }
+
+        
 
     }
 
